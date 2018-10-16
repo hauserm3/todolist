@@ -1,0 +1,10 @@
+{
+  "database": {
+    "connection": "mongodb://todolist:guestpass1@ds131743.mlab.com:31743/todolist"
+  },
+  "server": {
+    "port": 8080,
+    "jwtSecret": "secret-password",
+    "jwtExpiration": "1h"
+  }
+}
