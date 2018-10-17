@@ -9,13 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const logger_1 = require("../../helper/logger");
-const controller_1 = require("./controller");
+const user_controller_1 = require("./user-controller");
 class UserRoutes {
     register(server) {
         return __awaiter(this, void 0, void 0, function* () {
             return new Promise(resolve => {
                 logger_1.default.info('UserRoutes - Start adding user routes.');
-                const controller = new controller_1.default();
+                const controller = new user_controller_1.default();
                 server.route([
                     {
                         method: 'POST',

@@ -27,16 +27,18 @@
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
     "core-js": "^2.5.4",
-    "hapi": "^16.5.2",
+    "hapi": "17.4.0",
     "hapi-auth-jwt2": "^8.1.0",
     "rxjs": "~6.2.0",
     "winston": "^2.3.1",
     "winston-daily-rotate-file": "^1.4.6",
     "zone.js": "~0.8.26",
     "mongoose": "5.0.16",
-    "nconf": "0.10.0"
+    "nconf": "0.10.0",
+    "bcryptjs": "2.4.3"
   },
   "devDependencies": {
+    "@types/bcryptjs": "2.4.1",
     "@angular-devkit/build-angular": "~0.8.0",
     "@angular/cli": "~6.2.5",
     "@angular/compiler-cli": "^6.1.0",
@@ -58,6 +60,6 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
     "typescript": "~2.9.2",
-    "@types/hapi": "^16.1.6"
+    "@types/hapi": "17.0.11"
   }
 }

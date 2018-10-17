@@ -1,10 +1,9 @@
 import * as Hapi from 'hapi';
 
 import Logger from '../../helper/logger';
-import IRoute from '../../helper/route';
-import UserController from './controller';
+import UserController from './user-controller';
 
-export default class UserRoutes implements IRoute {
+export default class UserRoutes {
   public async register(server: Hapi.Server): Promise<any> {
     return new Promise( resolve => {
       Logger.info('UserRoutes - Start adding user routes.');

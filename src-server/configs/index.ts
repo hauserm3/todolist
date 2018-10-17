@@ -10,7 +10,11 @@ const configs = new nconf.Provider({
   }
 });
 
-export function getDatabaseConfig(): string {
+export interface IDataConfiguration {
+  connectionString: string;
+}
+
+export function getDatabaseConfig(): IDataConfiguration {
   return configs.get("database");
 }
 

@@ -9,36 +9,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Hapi = require("hapi");
-const DotEnv = require("dotenv");
-const Configs = require("./configs");
 const logger_1 = require("./helper/logger");
 const jwt = require("hapi-auth-jwt2");
-const serverConfig = Configs.getServerConfigs();
 class Server {
-    static start() {
+    static start(configs, db) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                DotEnv.config({
-                    path: `${process.cwd()}/.env`,
-                });
-                Server._instance = new Hapi.Server();
-                Server._instance.connection({
-                    host: process.env.HOST,
-                    port: process.env.PORT,
+                Server._instance = new Hapi.Server({
+                    debug: { request: ['error'] },
+                    port: configs.port,
+                    routes: {
+                        cors: {
+                            origin: ["*"]
+                        }
+                    }
                 });
                 yield Server._instance.register(jwt);
-                Server._instance.auth.strategy('jwt', 'jwt', { key: serverConfig.jwtSecret,
-                    validate: validate,
-                    verifyOptions: { algorithms: ['HS256'] } // pick a strong algorithm
-                });
-                server.auth.strategy('jwt', 'jwt', { key: 'NeverShareYourSecret',
-                    validate: validate,
+                Server._instance.auth.strategy('jwt', 'jwt', { key: configs.jwtSecret,
                     verifyOptions: { algorithms: ['HS256'] } // pick a strong algorithm
                 });
                 yield Server._instance.start();
                 logger_1.default.info(`Server - Up and running!`);
+                logger_1.default.info(`Server info`, Server._instance.info);
                 return Server._instance;
-                ;
             }
             catch (error) {
                 logger_1.default.info(`Server - There was something wrong: ${error}`);
