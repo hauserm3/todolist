@@ -1,46 +1,54 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const logger_1 = require("../../helper/logger");
 const user_controller_1 = require("./user-controller");
-class UserRoutes {
-    register(server) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return new Promise(resolve => {
-                logger_1.default.info('UserRoutes - Start adding user routes.');
-                const controller = new user_controller_1.default();
-                server.route([
-                    {
-                        method: 'POST',
-                        path: '/api/users',
-                        config: {
-                            handler: controller.create,
-                            description: 'Method that creates a new user.',
-                            tags: ['api', 'users'],
-                            auth: false,
-                        }
-                    },
-                    {
-                        method: 'GET',
-                        path: '/api/users/{id}',
-                        config: {
-                            handler: controller.getById,
-                            description: 'Method that get a user by its id.',
-                            tags: ['api', 'users'],
-                            auth: false,
+const UserValidator = require("./user-validator");
+function default_1(server, serverConfigs, database) {
+    const userController = new user_controller_1.default(serverConfigs, database);
+    server.bind(userController);
+    server.route({
+        method: "POST",
+        path: "/users",
+        options: {
+            handler: userController.createUser,
+            auth: false,
+            tags: ["api", "users"],
+            description: "Create a user.",
+            validate: {
+                payload: UserValidator.createUserModel
+            },
+            plugins: {
+                "hapi-swagger": {
+                    responses: {
+                        "201": {
+                            description: "User created."
                         }
                     }
-                ]);
-            });
-        });
-    }
+                }
+            }
+        }
+    });
+    server.route({
+        method: "POST",
+        path: "/users/login",
+        options: {
+            handler: userController.loginUser,
+            auth: false,
+            tags: ["api", "users"],
+            description: "Login a user.",
+            validate: {
+                payload: UserValidator.loginUserModel
+            },
+            plugins: {
+                "hapi-swagger": {
+                    responses: {
+                        "200": {
+                            description: "User logged in."
+                        }
+                    }
+                }
+            }
+        }
+    });
 }
-exports.default = UserRoutes;
+exports.default = default_1;
 //# sourceMappingURL=routes.js.map

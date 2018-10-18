@@ -1,36 +1,61 @@
 import * as Hapi from 'hapi';
-
-import Logger from '../../helper/logger';
 import UserController from './user-controller';
+import { UserModel } from "./user";
+import * as UserValidator from "./user-validator";
+import {IDatabase} from '../../database';
+import {IServerConfigs} from '../../configs';
 
-export default class UserRoutes {
-  public async register(server: Hapi.Server): Promise<any> {
-    return new Promise( resolve => {
-      Logger.info('UserRoutes - Start adding user routes.');
-      const controller = new UserController();
+export default function(
+  server: Hapi.Server,
+  serverConfigs: IServerConfigs,
+  database: IDatabase
+) {
+  const userController = new UserController(serverConfigs, database);
+  server.bind(userController);
 
-      server.route([
-        {
-          method: 'POST',
-          path: '/api/users',
-          config: {
-            handler: controller.create,
-            description: 'Method that creates a new user.',
-            tags: ['api', 'users'],
-            auth: false,
-          }
-        },
-        {
-          method: 'GET',
-          path: '/api/users/{id}',
-          config: {
-            handler: controller.getById,
-            description: 'Method that get a user by its id.',
-            tags: ['api', 'users'],
-            auth: false,
+  server.route({
+    method: "POST",
+    path: "/users",
+    options: {
+      handler: userController.createUser,
+      auth: false,
+      tags: ["api", "users"],
+      description: "Create a user.",
+      validate: {
+        payload: UserValidator.createUserModel
+      },
+      plugins: {
+        "hapi-swagger": {
+          responses: {
+            "201": {
+              description: "User created."
+            }
           }
         }
-      ])
-    });
-  }
+      }
+    }
+  });
+
+  server.route({
+    method: "POST",
+    path: "/users/login",
+    options: {
+      handler: userController.loginUser,
+      auth: false,
+      tags: ["api", "users"],
+      description: "Login a user.",
+      validate: {
+        payload: UserValidator.loginUserModel
+      },
+      plugins: {
+        "hapi-swagger": {
+          responses: {
+            "200": {
+              description: "User logged in."
+            }
+          }
+        }
+      }
+    }
+  });
 }

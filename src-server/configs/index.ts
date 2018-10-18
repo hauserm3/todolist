@@ -11,7 +11,7 @@ const configs = new nconf.Provider({
 });
 
 export interface IDataConfiguration {
-  connectionString: string;
+  connection: string;
 }
 
 export function getDatabaseConfig(): IDataConfiguration {
@@ -23,6 +23,7 @@ export function getServerConfigs(): IServerConfigs {
 }
 
 export interface IServerConfigs {
+  host: string;
   port: number;
   jwtSecret: string;
   jwtExpiration: string;

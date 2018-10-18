@@ -12,6 +12,7 @@ const common_1 = require("@angular/common");
 const app_component_1 = require("./app.component");
 const animations_1 = require("@angular/platform-browser/animations");
 const material_1 = require("@angular/material");
+const app_routing_1 = require("./app.routing");
 const app_service_1 = require("./app.service");
 const auth_guard_1 = require("./guards/auth.guard");
 const authentication_service_1 = require("./services/authentication.service");
@@ -19,6 +20,7 @@ const jwt_interceptor_1 = require("./services/jwt.interceptor");
 const auth_component_1 = require("./auth/auth.component");
 const task_component_1 = require("./task/task.component");
 const http_1 = require("@angular/common/http");
+const home_component_1 = require("./home/home.component");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -26,11 +28,13 @@ AppModule = __decorate([
         declarations: [
             app_component_1.AppComponent,
             auth_component_1.AuthComponent,
-            task_component_1.TaskComponent
+            task_component_1.TaskComponent,
+            home_component_1.HomeComponent
         ],
         imports: [
             platform_browser_1.BrowserModule,
             animations_1.BrowserAnimationsModule,
+            app_routing_1.routing,
             material_1.MatToolbarModule,
             material_1.MatButtonModule,
             material_1.MatCardModule,

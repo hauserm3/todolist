@@ -11,16 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
 const http_1 = require("@angular/common/http");
-// import {Observable} from "rxjs/Observable";
-require("rxjs/add/operator/map");
 const rxjs_1 = require("rxjs");
-const rxjs_2 = require("rxjs");
 const router_1 = require("@angular/router");
 let AuthenticationService = class AuthenticationService {
     constructor(http, router) {
         this.http = http;
         this.router = router;
-        this.loggedIn$ = new rxjs_2.BehaviorSubject(false);
+        this.loggedIn$ = new rxjs_1.BehaviorSubject(false);
     }
     get isLoggedIn() {
         if (localStorage.getItem('user-jwt-token')) {

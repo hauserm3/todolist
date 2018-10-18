@@ -20,8 +20,7 @@ import { JwtInterceptor } from "./services/jwt.interceptor";
 import { AuthComponent } from './auth/auth.component';
 import { TaskComponent } from './task/task.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-
-
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -31,11 +30,13 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
   declarations: [
     AppComponent,
     AuthComponent,
-    TaskComponent
+    TaskComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    routing,
     MatToolbarModule,
     MatButtonModule,
     MatCardModule,
