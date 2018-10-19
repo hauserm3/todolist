@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
 const http_1 = require("@angular/common/http");
 const authentication_service_1 = require("./authentication.service");
+const operators_1 = require("rxjs/operators");
 let JwtInterceptor = class JwtInterceptor {
     constructor(authService) {
         this.authService = authService;
@@ -29,13 +30,13 @@ let JwtInterceptor = class JwtInterceptor {
             });
         }
         return next.handle(request)
-            .do(event => { }, (err) => {
+            .pipe(operators_1.tap(event => { }, (err) => {
             if (err instanceof http_1.HttpErrorResponse) {
                 if (err.status === 401) {
                     this.authService.logout();
                 }
             }
-        });
+        }));
     }
 };
 JwtInterceptor = __decorate([

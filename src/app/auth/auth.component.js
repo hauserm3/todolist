@@ -10,9 +10,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
+const forms_1 = require("@angular/forms");
 let AuthComponent = class AuthComponent {
-    constructor() { }
+    constructor() {
+        this.email = new forms_1.FormControl('', [forms_1.Validators.required, forms_1.Validators.email]);
+    }
     ngOnInit() {
+    }
+    getErrorMessage() {
+        return this.email.hasError('required') ? 'You must enter a value' :
+            this.email.hasError('email') ? 'Not a valid email' :
+                '';
     }
 };
 AuthComponent = __decorate([

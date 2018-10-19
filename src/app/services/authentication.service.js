@@ -13,6 +13,7 @@ const core_1 = require("@angular/core");
 const http_1 = require("@angular/common/http");
 const rxjs_1 = require("rxjs");
 const router_1 = require("@angular/router");
+const operators_1 = require("rxjs/operators");
 let AuthenticationService = class AuthenticationService {
     constructor(http, router) {
         this.http = http;
@@ -27,15 +28,14 @@ let AuthenticationService = class AuthenticationService {
     }
     login(user) {
         return this.http.post('/api/auth/login', user)
-            .map((result) => {
+            .pipe(operators_1.map((result) => {
             if (result.token) {
                 localStorage.setItem('user-jwt-token', result.token.toString());
                 this.loggedIn$.next(true);
                 console.log('rez', result);
             }
             return result;
-        })
-            .catch(this.handleError);
+        }), operators_1.catchError(this.handleError));
     }
     // login(user: User): Observable<any> {
     //     return this.http.post('/api/auth/login', user)
@@ -61,7 +61,4 @@ AuthenticationService = __decorate([
         router_1.Router])
 ], AuthenticationService);
 exports.AuthenticationService = AuthenticationService;
-class AuthResult {
-}
-exports.AuthResult = AuthResult;
 //# sourceMappingURL=authentication.service.js.map

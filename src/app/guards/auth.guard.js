@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
 const router_1 = require("@angular/router");
 const authentication_service_1 = require("../services/authentication.service");
+const operators_1 = require("rxjs/operators");
 let AuthGuard = class AuthGuard {
     constructor(router, authService) {
         this.router = router;
@@ -29,14 +30,14 @@ let AuthGuard = class AuthGuard {
     // }
     canActivate(router, state) {
         return this.authService.isLoggedIn
-            .take(1) // check once
-            .map((isLoggedIn) => {
+            .pipe(operators_1.take(1), // check once
+        operators_1.map((isLoggedIn) => {
             if (!isLoggedIn) {
                 this.router.navigate(['auth']);
                 return false;
             }
             return true;
-        });
+        }));
     }
 };
 AuthGuard = __decorate([

@@ -8,10 +8,9 @@ import {TaskComponent} from './task/task.component';
 
 
 const appRoutes: Routes = [
+  {path: '', component: HomeComponent},
   {path: 'auth', component: AuthComponent},
-  {path: 'home', component: HomeComponent},
   {path: 'task', component: TaskComponent},
-  // { path: '', loadChildren: 'app/main/main.module#MainModule' },
   // { path: '', loadChildren: 'app/main/main.module#MainModule', canActivate: [AuthGuard] },
   // otherwise redirect to home
   {path: '**', redirectTo: ''}

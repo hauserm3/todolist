@@ -32,13 +32,18 @@ AppModule = __decorate([
             home_component_1.HomeComponent
         ],
         imports: [
+            common_1.CommonModule,
             platform_browser_1.BrowserModule,
             animations_1.BrowserAnimationsModule,
+            http_1.HttpClientModule,
             app_routing_1.routing,
             material_1.MatToolbarModule,
             material_1.MatButtonModule,
             material_1.MatCardModule,
-            material_1.MatCheckboxModule
+            material_1.MatCheckboxModule,
+            material_1.MatTabsModule,
+            material_1.MatGridListModule,
+            material_1.MatFormFieldModule
         ],
         providers: [
             app_service_1.AppService,

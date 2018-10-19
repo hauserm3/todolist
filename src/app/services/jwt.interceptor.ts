@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { AuthenticationService } from "./authentication.service";
+import {tap} from 'rxjs/operators';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
@@ -22,13 +23,15 @@ export class JwtInterceptor implements HttpInterceptor {
         }
 
         return next.handle(request)
-            .do(event => {},
-                (err: any) => {
+          .pipe(
+            tap(event => {},
+              (err: any) => {
                 if (err instanceof HttpErrorResponse) {
-                    if (err.status === 401) {
-                        this.authService.logout();
-                    }
+                  if (err.status === 401) {
+                    this.authService.logout();
+                  }
                 }
-        });
+              })
+          );
     }
 }

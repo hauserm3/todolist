@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import {CommonModule, LocationStrategy, PathLocationStrategy} from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -8,7 +8,10 @@ import {
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
-  MatToolbarModule
+  MatGridListModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatFormFieldModule
 } from '@angular/material';
 
 import {routing} from "./app.routing";
@@ -19,7 +22,7 @@ import { AuthenticationService } from "./services/authentication.service";
 import { JwtInterceptor } from "./services/jwt.interceptor";
 import { AuthComponent } from './auth/auth.component';
 import { TaskComponent } from './task/task.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 
 
@@ -34,13 +37,18 @@ import { HomeComponent } from './home/home.component';
     HomeComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     routing,
     MatToolbarModule,
     MatButtonModule,
     MatCardModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTabsModule,
+    MatGridListModule,
+    MatFormFieldModule
   ],
   providers: [
     AppService,

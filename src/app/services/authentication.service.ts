@@ -25,15 +25,17 @@ export class AuthenticationService {
 
     login(user: UserAuth): Observable<any> {
         return this.http.post('/api/auth/login', user)
-            .map((result: AuthResult) => {
-                if (result.token) {
-                    localStorage.setItem('user-jwt-token', result.token.toString());
-                    this.loggedIn$.next(true);
-                    console.log('rez', result);
-                }
-                return result;
-            })
-            .catch(this.handleError);
+          .pipe(
+            map((result: AuthResult) => {
+              if (result.token) {
+                localStorage.setItem('user-jwt-token', result.token.toString());
+                this.loggedIn$.next(true);
+                console.log('rez', result);
+              }
+              return result;
+            }),
+            catchError(this.handleError)
+          );
     }
 
     // login(user: User): Observable<any> {
@@ -55,9 +57,4 @@ export class AuthenticationService {
         let errMsg = (error.error) ? error.error : console.error(error);
         return Observable.throw(errMsg);
     }
-}
-
-export class AuthResult {
-  message: string;
-  token: boolean | string;
 }
