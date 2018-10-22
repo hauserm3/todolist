@@ -5,6 +5,12 @@ import * as UserValidator from "./user-validator";
 import {IDatabase} from '../../database';
 import {IServerConfigs} from '../../configs';
 
+const handleError = function (request, h, err) {
+  // console.error('err', err);
+  err.output.payload.message = err.details[0].message;
+  throw err;
+};
+
 export default function(
   server: Hapi.Server,
   serverConfigs: IServerConfigs,
@@ -15,46 +21,30 @@ export default function(
 
   server.route({
     method: "POST",
-    path: "/users",
+    path: "/api/users",
     options: {
       handler: userController.createUser,
       auth: false,
       tags: ["api", "users"],
       description: "Create a user.",
       validate: {
-        payload: UserValidator.createUserModel
-      },
-      plugins: {
-        "hapi-swagger": {
-          responses: {
-            "201": {
-              description: "User created."
-            }
-          }
-        }
+        payload: UserValidator.createUserModel,
+        failAction: handleError
       }
     }
   });
 
   server.route({
     method: "POST",
-    path: "/users/login",
+    path: "/api/users/login",
     options: {
       handler: userController.loginUser,
       auth: false,
       tags: ["api", "users"],
       description: "Login a user.",
       validate: {
-        payload: UserValidator.loginUserModel
-      },
-      plugins: {
-        "hapi-swagger": {
-          responses: {
-            "200": {
-              description: "User logged in."
-            }
-          }
-        }
+        payload: UserValidator.loginUserModel,
+        failAction: handleError
       }
     }
   });

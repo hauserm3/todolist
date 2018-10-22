@@ -11,9 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
 const http_1 = require("@angular/common/http");
+const models_1 = require("./models/models");
 let AppService = class AppService {
     constructor(http) {
         this.http = http;
+        this.snackBar = new models_1.snackBar();
     }
 };
 AppService = __decorate([

@@ -12,6 +12,7 @@ const Hapi = require("hapi");
 const jwt = require("hapi-auth-jwt2");
 const logger_1 = require("./helper/logger");
 const Users = require("./api/users");
+const Tasks = require("./api/tasks");
 class Server {
     static start(configs, db) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -34,6 +35,7 @@ class Server {
                 });
                 logger_1.default.info(`Register Routes.`);
                 Users.init(Server._instance, configs, db);
+                Tasks.init(Server._instance, configs, db);
                 logger_1.default.info(`Routes registered sucessfully.`);
                 yield Server._instance.start();
                 logger_1.default.info(`Server - Up and running!`);

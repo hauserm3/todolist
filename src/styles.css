@@ -2,3 +2,13 @@
 body {
     background-color: #303030;
 }
+.dark-snackbar {
+    background: #0e0e0e;
+    text-align: center;
+}
+.completed {
+    /*color: #9d9d9d;*/
+    /*color: #d0ca93;*/
+    color: #9c27b0;
+    text-decoration: line-through;
+}

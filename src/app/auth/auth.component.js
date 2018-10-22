@@ -10,17 +10,48 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
-const forms_1 = require("@angular/forms");
+const router_1 = require("@angular/router");
+const material_1 = require("@angular/material");
+const authentication_service_1 = require("../services/authentication.service");
+const models_1 = require("../models/models");
+const snack_bar_component_1 = require("../snack-bar/snack-bar.component");
+const app_service_1 = require("../app.service");
 let AuthComponent = class AuthComponent {
-    constructor() {
-        this.email = new forms_1.FormControl('', [forms_1.Validators.required, forms_1.Validators.email]);
+    constructor(route, router, appService, authenticationService, snackBar) {
+        this.route = route;
+        this.router = router;
+        this.appService = appService;
+        this.authenticationService = authenticationService;
+        this.snackBar = snackBar;
+        this.model = new models_1.UserAuth();
     }
     ngOnInit() {
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
-    getErrorMessage() {
-        return this.email.hasError('required') ? 'You must enter a value' :
-            this.email.hasError('email') ? 'Not a valid email' :
-                '';
+    login() {
+        this.authenticationService.login(this.model)
+            .subscribe(data => {
+            this.router.navigate([this.returnUrl, 'task']);
+        }, error => {
+            this.openSnackBarError(error);
+        });
+    }
+    create() {
+        this.authenticationService.create(this.model)
+            .subscribe(data => {
+            this.router.navigate([this.returnUrl, 'task']);
+        }, error => {
+            this.openSnackBarError(error);
+        });
+    }
+    openSnackBarError(message) {
+        this.appService.snackBar.msg = message;
+        this.appService.snackBar.err = true;
+        this.snackBar.openFromComponent(snack_bar_component_1.SnackBarComponent, {
+            duration: 3000,
+            horizontalPosition: 'center',
+            panelClass: ['dark-snackbar']
+        });
     }
 };
 AuthComponent = __decorate([
@@ -29,7 +60,11 @@ AuthComponent = __decorate([
         templateUrl: './auth.component.html',
         styleUrls: ['./auth.component.css']
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [router_1.ActivatedRoute,
+        router_1.Router,
+        app_service_1.AppService,
+        authentication_service_1.AuthenticationService,
+        material_1.MatSnackBar])
 ], AuthComponent);
 exports.AuthComponent = AuthComponent;
 //# sourceMappingURL=auth.component.js.map

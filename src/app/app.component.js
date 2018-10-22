@@ -10,17 +10,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
+const material_1 = require("@angular/material");
 const authentication_service_1 = require("./services/authentication.service");
+const task_dialog_component_1 = require("./task-dialog/task-dialog.component");
+const models_1 = require("./models/models");
+const task_service_1 = require("./services/task.service");
 let AppComponent = class AppComponent {
-    constructor(authService) {
+    constructor(authService, taskService, dialog) {
         this.authService = authService;
+        this.taskService = taskService;
+        this.dialog = dialog;
         this.appName = 'Todolist';
+        this.isLogIn = false;
+        this.task = new models_1.Task();
     }
     ngOnInit() {
         this.isLoggedIn$ = this.authService.isLoggedIn;
+        this.authService.isLoggedIn.subscribe((res) => {
+            this.isLogIn = res;
+        });
     }
     onLogout() {
         this.authService.logout();
+    }
+    addNewTask() {
+        let taskDialog = new models_1.TaskDialog();
+        const dialogRef = this.dialog.open(task_dialog_component_1.TaskDialogComponent, {
+            width: '250px',
+            data: taskDialog
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (!result)
+                return;
+            this.task = result;
+            this.taskService.createTask(this.task).subscribe((res) => { });
+        });
     }
 };
 AppComponent = __decorate([
@@ -29,7 +53,9 @@ AppComponent = __decorate([
         templateUrl: './app.component.html',
         styleUrls: ['./app.component.css']
     }),
-    __metadata("design:paramtypes", [authentication_service_1.AuthenticationService])
+    __metadata("design:paramtypes", [authentication_service_1.AuthenticationService,
+        task_service_1.TaskService,
+        material_1.MatDialog])
 ], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

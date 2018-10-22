@@ -21,6 +21,17 @@ class UserController {
         const payload = { id: user._id };
         return Jwt.sign(payload, jwtSecret, { expiresIn: jwtExpiration });
     }
+    createUser(request, h) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                let user = yield this.database.userModel.create(request.payload);
+                return h.response({ token: this.generateToken(user) }).code(201);
+            }
+            catch (error) {
+                return Boom.badImplementation(error);
+            }
+        });
+    }
     loginUser(request, h) {
         return __awaiter(this, void 0, void 0, function* () {
             const { email, password } = request.payload;
@@ -32,17 +43,6 @@ class UserController {
                 return Boom.unauthorized("Password is invalid.");
             }
             return { token: this.generateToken(user) };
-        });
-    }
-    createUser(request, h) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                let user = yield this.database.userModel.create(request.payload);
-                return h.response({ token: this.generateToken(user) }).code(201);
-            }
-            catch (error) {
-                return Boom.badImplementation(error);
-            }
         });
     }
 }

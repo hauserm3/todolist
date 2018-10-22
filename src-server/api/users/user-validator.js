@@ -2,9 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Joi = require("joi");
 exports.createUserModel = Joi.object().keys({
+    username: Joi.string().min(3).max(30).required(),
     email: Joi.string().email().trim().required(),
-    name: Joi.string().required(),
-    password: Joi.string().trim().required()
+    password: Joi.string().min(3).max(30).trim().required()
 });
 exports.loginUserModel = Joi.object().keys({
     email: Joi.string().email().required(),

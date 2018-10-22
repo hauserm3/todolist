@@ -18,16 +18,6 @@ let AuthGuard = class AuthGuard {
         this.router = router;
         this.authService = authService;
     }
-    // canActivate(router: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    //   if (localStorage.getItem('user-jwt-token')) {
-    //     // logged in so return true
-    //     return true;
-    //   }
-    //
-    //   // not logged in so redirect to login page with the return url
-    //   this.router.navigate(['login']);
-    //   return false;
-    // }
     canActivate(router, state) {
         return this.authService.isLoggedIn
             .pipe(operators_1.take(1), // check once

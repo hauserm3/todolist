@@ -14,6 +14,7 @@ const http_1 = require("@angular/common/http");
 const rxjs_1 = require("rxjs");
 const router_1 = require("@angular/router");
 const operators_1 = require("rxjs/operators");
+const throwError_1 = require("rxjs/internal/observable/throwError");
 let AuthenticationService = class AuthenticationService {
     constructor(http, router) {
         this.http = http;
@@ -26,24 +27,26 @@ let AuthenticationService = class AuthenticationService {
         }
         return this.loggedIn$.asObservable();
     }
-    login(user) {
-        return this.http.post('/api/auth/login', user)
+    create(user) {
+        return this.http.post('/api/users', user)
             .pipe(operators_1.map((result) => {
             if (result.token) {
                 localStorage.setItem('user-jwt-token', result.token.toString());
                 this.loggedIn$.next(true);
-                console.log('rez', result);
             }
             return result;
         }), operators_1.catchError(this.handleError));
     }
-    // login(user: User): Observable<any> {
-    //     return this.http.post('/api/auth/login', user)
-    //         .pipe(
-    //             tap(data => console.log('src-server data:', data)),
-    //             catchError(this.handleError('getData'))
-    //         );
-    // }
+    login(user) {
+        return this.http.post('/api/users/login', user)
+            .pipe(operators_1.map((result) => {
+            if (result.token) {
+                localStorage.setItem('user-jwt-token', result.token.toString());
+                this.loggedIn$.next(true);
+            }
+            return result;
+        }), operators_1.catchError(this.handleError));
+    }
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('user-jwt-token');
@@ -51,8 +54,8 @@ let AuthenticationService = class AuthenticationService {
         this.router.navigate(['/login']);
     }
     handleError(error) {
-        let errMsg = (error.error) ? error.error : console.error(error);
-        return rxjs_1.Observable.throw(errMsg);
+        let errMsg = error.error ? error.error.message : error.error;
+        return throwError_1.throwError(errMsg);
     }
 };
 AuthenticationService = __decorate([

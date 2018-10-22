@@ -1,10 +1,12 @@
 import * as Mongoose from "mongoose";
+import Logger from './helper/logger';
 import { IDataConfiguration} from "./configs";
 import { IUser, UserModel } from "./api/users/user";
+import {ITask, TaskModel} from './api/tasks/task';
 
 export interface IDatabase {
   userModel: Mongoose.Model<IUser>;
-  // taskModel: Mongoose.Model<ITask>;
+  taskModel: Mongoose.Model<ITask>;
 }
 
 export function init(config: IDataConfiguration): IDatabase {
@@ -14,15 +16,15 @@ export function init(config: IDataConfiguration): IDatabase {
   let mongoDb = Mongoose.connection;
 
   mongoDb.on("error", () => {
-    console.log(`Unable to connect to database: ${config.connection}`);
+    Logger.error(`Unable to connect to database: ${config.connection}`);
   });
 
   mongoDb.once("open", () => {
-    console.log(`Connected to database: ${config.connection}`);
+    Logger.info(`Connected to database: ${config.connection}`);
   });
 
   return {
-    userModel: UserModel
-    // taskModel: TaskModel
+    userModel: UserModel,
+    taskModel: TaskModel
   };
 }

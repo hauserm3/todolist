@@ -1,12 +1,11 @@
 import * as Hapi from 'hapi';
 import jwt = require('hapi-auth-jwt2');
-import * as Database from "./database";
-import * as Configs from "./configs";
 import Logger from './helper/logger';
 import {IServerConfigs} from './configs';
 import {IDatabase} from './database';
 import {IRequest} from './interfaces/request';
 import * as Users from "./api/users";
+import * as Tasks from "./api/tasks";
 
 
 export default class Server {
@@ -37,6 +36,7 @@ export default class Server {
 
       Logger.info(`Register Routes.`);
       Users.init(Server._instance, configs, db);
+      Tasks.init(Server._instance, configs, db);
       Logger.info(`Routes registered sucessfully.`);
 
       await Server._instance.start();

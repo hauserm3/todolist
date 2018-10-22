@@ -23,6 +23,15 @@ export default class UserController {
     return Jwt.sign(payload, jwtSecret, { expiresIn: jwtExpiration });
   }
 
+  public async createUser(request: IRequest, h: Hapi.ResponseToolkit) {
+    try {
+      let user: any = await this.database.userModel.create(request.payload);
+      return h.response({ token: this.generateToken(user) }).code(201);
+    } catch (error) {
+      return Boom.badImplementation(error);
+    }
+  }
+
   public async loginUser(request: ILoginRequest, h: Hapi.ResponseToolkit) {
     const { email, password } = request.payload;
 
@@ -37,15 +46,6 @@ export default class UserController {
     }
 
     return { token: this.generateToken(user) };
-  }
-
-  public async createUser(request: IRequest, h: Hapi.ResponseToolkit) {
-    try {
-      let user: any = await this.database.userModel.create(request.payload);
-      return h.response({ token: this.generateToken(user) }).code(201);
-    } catch (error) {
-      return Boom.badImplementation(error);
-    }
   }
 
 }

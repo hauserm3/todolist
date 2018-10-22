@@ -12,8 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
 let HomeComponent = class HomeComponent {
     constructor() { }
-    ngOnInit() {
-    }
+    ngOnInit() { }
 };
 HomeComponent = __decorate([
     core_1.Component({

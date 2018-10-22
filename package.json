@@ -6,7 +6,8 @@
     "ng": "ng",
     "start": "ng serve",
     "start-f": "ng serve --proxy-config proxy.conf.dev.json",
-    "start-s": "node src-server/index",
+    "start-b": "node src-server/index",
+    "start-bw": "nodemon src-server/index.js --watch src-server",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -37,7 +38,8 @@
     "winston": "^2.3.1",
     "winston-daily-rotate-file": "^1.4.6",
     "zone.js": "~0.8.26",
-    "joi": "13.2.0"
+    "joi": "13.2.0",
+    "nodemon": "1.17.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.8.0",
