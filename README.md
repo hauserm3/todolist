@@ -27,8 +27,11 @@ $ npm i
 
 ## Run
 
+Important. the server starts on port 8888
+
 ```sh
 $ npm run start
 ```
 Wait for the message -> "Compiled successfully".
+
 Open your browser on http://localhost:4200
