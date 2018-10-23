@@ -31,13 +31,14 @@ let AuthComponent = class AuthComponent {
     login() {
         this.authenticationService.login(this.model)
             .subscribe(data => {
+            console.log('login');
             this.router.navigate([this.returnUrl, 'task']);
         }, error => {
             this.openSnackBarError(error);
         });
     }
-    create() {
-        this.authenticationService.create(this.model)
+    register() {
+        this.authenticationService.register(this.model)
             .subscribe(data => {
             this.router.navigate([this.returnUrl, 'task']);
         }, error => {

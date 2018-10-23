@@ -27,7 +27,7 @@ let AuthenticationService = class AuthenticationService {
         }
         return this.loggedIn$.asObservable();
     }
-    create(user) {
+    register(user) {
         return this.http.post('/api/users', user)
             .pipe(operators_1.map((result) => {
             if (result.token) {
@@ -51,7 +51,7 @@ let AuthenticationService = class AuthenticationService {
         // remove user from local storage to log user out
         localStorage.removeItem('user-jwt-token');
         this.loggedIn$.next(false);
-        this.router.navigate(['/login']);
+        this.router.navigate(['/auth']);
     }
     handleError(error) {
         let errMsg = error.error ? error.error.message : error.error;

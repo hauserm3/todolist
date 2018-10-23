@@ -31,6 +31,7 @@ export class AuthComponent implements OnInit {
     this.authenticationService.login(this.model)
       .subscribe(
         data => {
+          console.log('login');
           this.router.navigate([this.returnUrl, 'task']);
         },
         error => {
@@ -38,8 +39,8 @@ export class AuthComponent implements OnInit {
         });
   }
 
-  create() {
-    this.authenticationService.create(this.model)
+  register() {
+    this.authenticationService.register(this.model)
       .subscribe(
         data => {
           this.router.navigate([this.returnUrl, 'task']);
