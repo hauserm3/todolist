@@ -4,7 +4,7 @@
   },
   "server": {
     "host": "localhost",
-    "port": 8080,
+    "port": 8888,
     "jwtSecret": "secret-password",
     "jwtExpiration": "1h"
   }
