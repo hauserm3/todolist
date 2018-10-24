@@ -23,22 +23,22 @@ let AuthComponent = class AuthComponent {
         this.appService = appService;
         this.authenticationService = authenticationService;
         this.snackBar = snackBar;
-        this.model = new models_1.UserAuth();
+        this.modelLog = new models_1.UserAuth();
+        this.modelReg = new models_1.UserAuth();
     }
     ngOnInit() {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
     login() {
-        this.authenticationService.login(this.model)
+        this.authenticationService.login(this.modelLog)
             .subscribe(data => {
-            console.log('login');
             this.router.navigate([this.returnUrl, 'task']);
         }, error => {
             this.openSnackBarError(error);
         });
     }
     register() {
-        this.authenticationService.register(this.model)
+        this.authenticationService.register(this.modelReg)
             .subscribe(data => {
             this.router.navigate([this.returnUrl, 'task']);
         }, error => {

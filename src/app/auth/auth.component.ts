@@ -14,7 +14,8 @@ import {AppService} from '../app.service';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
-  model: UserAuth = new UserAuth();
+  modelLog: UserAuth = new UserAuth();
+  modelReg: UserAuth = new UserAuth();
   returnUrl: string;
 
   constructor(private route: ActivatedRoute,
@@ -28,10 +29,9 @@ export class AuthComponent implements OnInit {
   }
 
   login() {
-    this.authenticationService.login(this.model)
+    this.authenticationService.login(this.modelLog)
       .subscribe(
         data => {
-          console.log('login');
           this.router.navigate([this.returnUrl, 'task']);
         },
         error => {
@@ -40,7 +40,7 @@ export class AuthComponent implements OnInit {
   }
 
   register() {
-    this.authenticationService.register(this.model)
+    this.authenticationService.register(this.modelReg)
       .subscribe(
         data => {
           this.router.navigate([this.returnUrl, 'task']);
