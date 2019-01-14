@@ -50,6 +50,10 @@ export class TaskComponent implements OnInit {
     });
   }
 
+  someFunc2(db: string) {
+    return db;
+  }
+
   deleteTask(task: Task) {
     let taskDialog = new TaskDialog();
     taskDialog.delete = true;
