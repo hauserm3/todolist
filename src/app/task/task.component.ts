@@ -72,7 +72,7 @@ export class TaskComponent implements OnInit {
     });
   }
 
-  someFunc(ad: string) {
+  someFunc(ad: string, sss: number) {
     return ad;
   }
 
