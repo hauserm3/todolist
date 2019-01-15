@@ -30,8 +30,19 @@ $ npm i
 Important. the server starts on port 8888
 
 ```sh
+$ npm run compile
 $ npm run start
 ```
 Wait for the message -> "Compiled successfully".
 
 Open your browser on http://localhost:4200
+
+## Development
+
+```sh
+$ npm run compile-w   # Run the compiler in watch mode
+$ npm run tslint      # Check all 'ts' files in the project for errors.
+$ npm run tslint-fix  # Fix all 'ts' files in the project.
+
+```
+Wait for the message -> "Compiled successfully".
