@@ -45,4 +45,4 @@ $ npm run tslint      # Check all 'ts' files in the project for errors.
 $ npm run tslint-fix  # Fix all 'ts' files in the project.
 
 ```
-Wait for the message -> "Compiled successfully".
+
