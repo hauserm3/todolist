@@ -14,3 +14,19 @@ h1{
 .task-button {
     margin-right: 8px;
 }
+
+.filter-button {
+    position: absolute;
+    top: 100px;
+    right: 25px;
+}
+
+.sidenav {
+    padding: 20px;
+    min-height: 120px;
+}
+
+.sidenav h2 {
+    text-align: center;
+    color: #f44336;
+}

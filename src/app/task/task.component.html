@@ -1,11 +1,34 @@
 <div>
-  <mat-card class="task" *ngFor="let task of taskList">
-    <mat-checkbox [(ngModel)]="task.completed" (change)="editTask(task)">
-      <span [class.completed]="task.completed">{{task.task}}</span>
-    </mat-checkbox>
-    <span>
-      <button mat-button color="accent" (click)="editTaskDialog(task)">edit</button>
-      <button mat-button color="warn" (click)="deleteTask(task)">delete</button>
-    </span>
-  </mat-card>
+  <button mat-stroked-button
+          color="accent"
+          class="filter-button"
+          (click)="drawer.toggle()">
+    Filter
+  </button>
+
+  <mat-drawer-container class="drawer-container" autosize>
+    <mat-drawer-content>
+      <mat-card class="task" *ngFor="let task of taskList">
+        <mat-checkbox [(ngModel)]="task.completed" (change)="editTask(task)">
+          <span [class.completed]="task.completed">{{task.task}}</span>
+        </mat-checkbox>
+        <span>
+        <button mat-button color="accent" (click)="editTaskDialog(task)">edit</button>
+        <button mat-button color="warn" (click)="deleteTask(task)">delete</button>
+      </span>
+      </mat-card>
+    </mat-drawer-content>
+
+    <mat-drawer #drawer
+                mode="side"
+                opened="false"
+                position="end"
+                class="sidenav">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+      <h2 *ngIf="filter_message">no matches</h2>
+    </mat-drawer>
+  </mat-drawer-container>
+
 </div>

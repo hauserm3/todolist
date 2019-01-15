@@ -12,7 +12,9 @@ import {TaskDialogComponent} from '../task-dialog/task-dialog.component';
 export class TaskComponent implements OnInit {
 
   taskList: Task[] = [];
+  taskListreStock: Task[] = [];
   task = new Task();
+  filter_message = false;
 
   constructor(private taskService: TaskService,
               public dialog: MatDialog) { }
@@ -25,6 +27,7 @@ export class TaskComponent implements OnInit {
   getTasks() {
     this.taskService.getTasks().subscribe((res: Task[]) => {
       this.taskList = res;
+      this.taskListreStock = res;
     });
   }
 
@@ -66,6 +69,28 @@ export class TaskComponent implements OnInit {
         this.getTasks();
       });
     });
+  }
+
+  applyFilter(filterValue: string) {
+    const filterVal = filterValue.trim().toLowerCase();
+    let taskListFilter = [];
+
+    taskListFilter = this.taskListreStock.filter(item => {
+      if (item.task.toString().toLowerCase().indexOf(filterVal) !== -1) {
+        return true;
+      }
+      return false;
+    });
+
+    if (taskListFilter.length) {
+      this.filter_message = false;
+      this.taskList = taskListFilter;
+    } else if (filterValue === '') {
+      this.filter_message = false;
+      this.taskList = this.taskListreStock;
+    } else {
+      this.filter_message = true;
+    }
   }
 
 }

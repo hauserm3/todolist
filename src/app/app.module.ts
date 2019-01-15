@@ -13,7 +13,9 @@ import {
   MatToolbarModule,
   MatFormFieldModule,
   MatInputModule,
-  MatSnackBarModule, MatDialogModule
+  MatSnackBarModule,
+  MatDialogModule,
+  MatSidenavModule
 } from '@angular/material';
 
 import {routing} from './app.routing';
@@ -58,7 +60,8 @@ import {TaskService} from './services/task.service';
     MatFormFieldModule,
     MatInputModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSidenavModule
   ],
   entryComponents: [
     SnackBarComponent,
