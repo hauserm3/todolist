@@ -61,6 +61,8 @@ export default class Server {
 
 
   conflictFunction(arg1: number, arg2: number) {
+    console.log('ddddd');
+    console.log('aaaa');
     return arg1 * arg2;
   }
 }
