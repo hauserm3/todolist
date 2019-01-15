@@ -21,9 +21,13 @@ h1{
     right: 25px;
 }
 
+.sidenav-content {
+    min-height: 200px;
+}
+
 .sidenav {
     padding: 20px;
-    min-height: 120px;
+    min-height: 150px;
 }
 
 .sidenav h2 {

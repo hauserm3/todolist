@@ -7,7 +7,7 @@
   </button>
 
   <mat-sidenav-container hasBackdrop="false">
-    <mat-sidenav-content>
+    <mat-sidenav-content class="sidenav-content">
       <mat-card class="task" *ngFor="let task of taskList">
         <mat-checkbox [(ngModel)]="task.completed" (change)="editTask(task)">
           <span [class.completed]="task.completed">{{task.task}}</span>

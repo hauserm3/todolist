@@ -90,6 +90,7 @@ export class TaskComponent implements OnInit {
       this.taskList = this.taskListreStock;
     } else {
       this.filter_message = true;
+      this.taskList = [];
     }
   }
 
