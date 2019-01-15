@@ -1,14 +1,14 @@
-import {Injectable} from "@angular/core";
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {snackBar} from './models/models';
+import {SnackBar} from './models/models';
 
 @Injectable()
 export class AppService {
 
-  snackBar: snackBar;
+  snackBar: SnackBar;
 
   constructor(private http: HttpClient) {
-    this.snackBar = new snackBar();
+    this.snackBar = new SnackBar();
   }
 
 }

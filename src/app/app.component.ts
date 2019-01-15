@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/internal/Observable';
 import {MatDialog} from '@angular/material';
 import {AuthenticationService} from './services/authentication.service';
@@ -11,10 +11,10 @@ import {TaskService} from './services/task.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   appName = 'Todolist';
 
-  isLogIn: boolean = false;
+  isLogIn = false;
   isLoggedIn$: Observable<boolean>;
 
   task = new Task();
@@ -36,14 +36,14 @@ export class AppComponent {
   }
 
   addNewTask() {
-    let taskDialog = new TaskDialog();
+    const taskDialog = new TaskDialog();
     const dialogRef = this.dialog.open(TaskDialogComponent, {
       width: '250px',
       data: taskDialog
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(!result) return;
+      if (!result) { return; }
       this.task = result;
       this.taskService.createTask(this.task).subscribe((res) => {});
     });

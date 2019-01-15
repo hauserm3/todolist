@@ -1,4 +1,4 @@
-import * as Joi from "joi";
+import * as Joi from 'joi';
 
 export const createTaskModel = Joi.object().keys({
   task: Joi.string().required()

@@ -1,7 +1,7 @@
-import * as Mongoose from "mongoose";
+import * as Mongoose from 'mongoose';
 import Logger from './helper/logger';
-import { IDataConfiguration} from "./configs";
-import { IUser, UserModel } from "./api/users/user";
+import { IDataConfiguration} from './configs';
+import { IUser, UserModel } from './api/users/user';
 import {ITask, TaskModel} from './api/tasks/task';
 
 export interface IDatabase {
@@ -13,13 +13,13 @@ export function init(config: IDataConfiguration): IDatabase {
   (<any>Mongoose).Promise = Promise;
   Mongoose.connect(process.env.MONGO_URL || config.connection);
 
-  let mongoDb = Mongoose.connection;
+  const mongoDb = Mongoose.connection;
 
-  mongoDb.on("error", () => {
+  mongoDb.on('error', () => {
     Logger.error(`Unable to connect to database: ${config.connection}`);
   });
 
-  mongoDb.once("open", () => {
+  mongoDb.once('open', () => {
     Logger.info(`Connected to database: ${config.connection}`);
   });
 

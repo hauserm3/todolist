@@ -7,14 +7,14 @@ export class UserAuth {
   token: string;
 }
 
-export class snackBar {
-  constructor(){}
+export class SnackBar {
+  constructor() {}
   msg: string;
   err: boolean;
 }
 
 export class Task {
-  constructor(){}
+  constructor() {}
   userId: string;
   _id: string;
   task: string;
@@ -22,7 +22,7 @@ export class Task {
 }
 
 export class TaskDialog {
-  constructor(task: Task = new Task()){ this.task = task}
+  constructor(task: Task = new Task()) { this.task = task; }
   task: Task;
   edit: boolean;
   delete: boolean;

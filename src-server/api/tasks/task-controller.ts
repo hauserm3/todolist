@@ -1,9 +1,9 @@
-import * as Hapi from "hapi";
-import * as Boom from "boom";
-import { ITask } from "./task";
-import { IDatabase } from "../../database";
-import { IServerConfigs } from "../../configs";
-import { IRequest } from "../../interfaces/request";
+import * as Hapi from 'hapi';
+import * as Boom from 'boom';
+import { ITask } from './task';
+import { IDatabase } from '../../database';
+import { IServerConfigs } from '../../configs';
+import { IRequest } from '../../interfaces/request';
 
 export default class TaskController {
   private database: IDatabase;
@@ -15,12 +15,12 @@ export default class TaskController {
   }
 
   public async createTask(request: IRequest, h: Hapi.ResponseToolkit) {
-    let newTask: ITask = <ITask>request.payload;
+    const newTask: ITask = <ITask>request.payload;
     newTask.userId = request.auth.credentials.id;
     newTask.completed = false;
 
     try {
-      let task: ITask = await this.database.taskModel.create(newTask);
+      const task: ITask = await this.database.taskModel.create(newTask);
       return h.response(task).code(201);
     } catch (error) {
       return Boom.badImplementation(error);
@@ -28,12 +28,12 @@ export default class TaskController {
   }
 
   public async updateTask(request: IRequest, h: Hapi.ResponseToolkit) {
-    let userId = request.auth.credentials.id;
-    let _id = request.params["id"];
+    const userId = request.auth.credentials.id;
+    const _id = request.params['id'];
 
     try {
-      let task: ITask = await this.database.taskModel.findByIdAndUpdate(
-        { _id, userId }, //ES6 shorthand syntax
+      const task: ITask = await this.database.taskModel.findByIdAndUpdate(
+        { _id, userId }, // ES6 shorthand syntax
         { $set: request.payload },
         { new: true }
       );
@@ -49,10 +49,10 @@ export default class TaskController {
   }
 
   public async deleteTask(request: IRequest, h: Hapi.ResponseToolkit) {
-    let userId = request.auth.credentials.id;
-    let id = request.params["id"];
+    const userId = request.auth.credentials.id;
+    const id = request.params['id'];
 
-    let deletedTask = await this.database.taskModel.findOneAndRemove({
+    const deletedTask = await this.database.taskModel.findOneAndRemove({
       _id: id,
       userId: userId
     });
@@ -65,10 +65,10 @@ export default class TaskController {
   }
 
   public async getTaskById(request: IRequest, h: Hapi.ResponseToolkit) {
-    let userId = request.auth.credentials.id;
-    let _id = request.params["id"];
+    const userId = request.auth.credentials.id;
+    const _id = request.params['id'];
 
-    let task = await this.database.taskModel.findOne({ _id, userId })
+    const task = await this.database.taskModel.findOne({ _id, userId })
       .lean(true);
 
     if (task) {
@@ -79,11 +79,11 @@ export default class TaskController {
   }
 
   public async getTasks(request: IRequest, h: Hapi.ResponseToolkit) {
-    let userId = request.auth.credentials.id;
+    const userId = request.auth.credentials.id;
     // let top = request.query["top"];
-    let skip = request.query["skip"];
-    let tasks = await this.database.taskModel
-      .find({ userId: userId }, {"userId": 1, "task": 1, "completed": 1})
+    const skip = request.query['skip'];
+    const tasks = await this.database.taskModel
+      .find({ userId: userId }, {'userId': 1, 'task': 1, 'completed': 1})
       .sort({createdAt: -1})
       .lean(true)
       .skip(skip);

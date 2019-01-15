@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient} from '@angular/common/http';
 
-import {Observable, BehaviorSubject} from "rxjs";
-import {Router} from "@angular/router";
-import {catchError, tap, map} from "rxjs/operators";
-import {UserAuth} from "../models/models";
+import {Observable, BehaviorSubject} from 'rxjs';
+import {Router} from '@angular/router';
+import {catchError, tap, map} from 'rxjs/operators';
+import {UserAuth} from '../models/models';
 import {throwError} from 'rxjs/internal/observable/throwError';
 
 
@@ -19,7 +19,7 @@ export class AuthenticationService {
 
   get isLoggedIn() {
     if (localStorage.getItem('user-jwt-token')) {
-      this.loggedIn$.next(true)
+      this.loggedIn$.next(true);
     }
     return this.loggedIn$.asObservable();
   }
@@ -60,7 +60,7 @@ export class AuthenticationService {
   }
 
   private handleError(error: any) {
-    let errMsg = error.error ? error.error.message : error.error;
+    const errMsg = error.error ? error.error.message : error.error;
     return throwError(errMsg);
   }
 }

@@ -8,6 +8,8 @@
     "start-f": "ng serve --proxy-config proxy.conf.dev.json",
     "start-b": "node src-server/index",
     "start-bw": "nodemon src-server/index.js --watch src-server",
+    "tslint": "tslint src/**/*.ts src-server/**/*.ts --project tslint.json -t verbose",
+    "tslint-fix": "tslint --fix src/**/*.ts src-server/**/*.ts --project tslint.json -t verbose",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

@@ -2,8 +2,8 @@
 
 # compiled output
 /dist
-/tmp
-/out-tsc
+/**/*.js
+/**/*.map
 
 # dependencies
 /node_modules

@@ -1,7 +1,7 @@
 import * as Hapi from 'hapi';
 import UserController from './user-controller';
-import { UserModel } from "./user";
-import * as UserValidator from "./user-validator";
+import { UserModel } from './user';
+import * as UserValidator from './user-validator';
 import {IDatabase} from '../../database';
 import {IServerConfigs} from '../../configs';
 
@@ -20,13 +20,13 @@ export default function(
   server.bind(userController);
 
   server.route({
-    method: "POST",
-    path: "/api/users",
+    method: 'POST',
+    path: '/api/users',
     options: {
       handler: userController.createUser,
       auth: false,
-      tags: ["api", "users"],
-      description: "Create a user.",
+      tags: ['api', 'users'],
+      description: 'Create a user.',
       validate: {
         payload: UserValidator.createUserModel,
         failAction: handleError
@@ -35,13 +35,13 @@ export default function(
   });
 
   server.route({
-    method: "POST",
-    path: "/api/users/login",
+    method: 'POST',
+    path: '/api/users/login',
     options: {
       handler: userController.loginUser,
       auth: false,
-      tags: ["api", "users"],
-      description: "Login a user.",
+      tags: ['api', 'users'],
+      description: 'Login a user.',
       validate: {
         payload: UserValidator.loginUserModel,
         failAction: handleError

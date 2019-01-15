@@ -22,14 +22,14 @@ export class TaskComponent implements OnInit {
     this.taskService.taskListSub.subscribe(() => this.getTasks());
   }
 
-  getTasks(){
+  getTasks() {
     this.taskService.getTasks().subscribe((res: Task[]) => {
       this.taskList = res;
     });
   }
 
   editTaskDialog(task: Task) {
-    let taskDialog = new TaskDialog();
+    const taskDialog = new TaskDialog();
     taskDialog.edit = true;
     Object.assign(taskDialog.task, task);
     const dialogRef = this.dialog.open(TaskDialogComponent, {
@@ -38,9 +38,9 @@ export class TaskComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(!result) return;
+      if (!result) { return; }
       this.task = result;
-      this.editTask(this.task)
+      this.editTask(this.task);
     });
   }
 
@@ -50,12 +50,8 @@ export class TaskComponent implements OnInit {
     });
   }
 
-  someFunc2(db: string) {
-    return db;
-  }
-
   deleteTask(task: Task) {
-    let taskDialog = new TaskDialog();
+    const taskDialog = new TaskDialog();
     taskDialog.delete = true;
     taskDialog.task = task;
     const dialogRef = this.dialog.open(TaskDialogComponent, {
@@ -64,16 +60,12 @@ export class TaskComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(!result) return;
+      if (!result) { return; }
       this.task = result;
       this.taskService.deleteTask(this.task).subscribe((res) => {
         this.getTasks();
       });
     });
-  }
-
-  someFunc(ad: string, sss: number) {
-    return ad;
   }
 
 }

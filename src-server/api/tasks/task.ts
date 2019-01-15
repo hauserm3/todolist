@@ -1,4 +1,4 @@
-import * as Mongoose from "mongoose";
+import * as Mongoose from 'mongoose';
 
 export interface ITask extends Mongoose.Document {
   userId: string;
@@ -19,4 +19,4 @@ export const TaskSchema = new Mongoose.Schema(
   }
 );
 
-export const TaskModel = Mongoose.model<ITask>("Task", TaskSchema);
+export const TaskModel = Mongoose.model<ITask>('Task', TaskSchema);

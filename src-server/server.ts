@@ -4,8 +4,8 @@ import Logger from './helper/logger';
 import {IServerConfigs} from './configs';
 import {IDatabase} from './database';
 import {IRequest} from './interfaces/request';
-import * as Users from "./api/users";
-import * as Tasks from "./api/tasks";
+import * as Users from './api/users';
+import * as Tasks from './api/tasks';
 
 
 export default class Server {
@@ -21,7 +21,7 @@ export default class Server {
         port: configs.port,
         routes: {
           cors: {
-            origin: ["*"]
+            origin: ['*']
           }
         }
       });

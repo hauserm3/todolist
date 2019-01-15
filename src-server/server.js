@@ -24,7 +24,7 @@ class Server {
                     port: configs.port,
                     routes: {
                         cors: {
-                            origin: ["*"]
+                            origin: ['*']
                         }
                     }
                 });

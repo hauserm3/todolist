@@ -1,11 +1,11 @@
-import * as nconf from "nconf";
-import * as path from "path";
+import * as nconf from 'nconf';
+import * as path from 'path';
 
 const configs = new nconf.Provider({
   env: true,
   argv: true,
   store: {
-    type: "file",
+    type: 'file',
     file: path.join(__dirname, `./config.json`)
   }
 });
@@ -15,11 +15,11 @@ export interface IDataConfiguration {
 }
 
 export function getDatabaseConfig(): IDataConfiguration {
-  return configs.get("database");
+  return configs.get('database');
 }
 
 export function getServerConfigs(): IServerConfigs {
-  return configs.get("server");
+  return configs.get('server');
 }
 
 export interface IServerConfigs {

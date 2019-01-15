@@ -1,6 +1,6 @@
 {
+  "compileOnSave": true,
   "compilerOptions": {
-    "baseUrl": "./",
     "sourceMap": true,
     "declaration": false,
     "module": "commonjs",
@@ -15,5 +15,8 @@
       "es2017",
       "dom"
     ]
-  }
+  },
+  "exclude": [
+    "node_modules"
+  ]
 }

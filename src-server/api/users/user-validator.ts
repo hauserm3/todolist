@@ -1,4 +1,4 @@
-import * as Joi from "joi";
+import * as Joi from 'joi';
 
 export const createUserModel = Joi.object().keys({
   username: Joi.string().min(3).max(30).required(),

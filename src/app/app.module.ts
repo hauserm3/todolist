@@ -16,13 +16,13 @@ import {
   MatSnackBarModule, MatDialogModule
 } from '@angular/material';
 
-import {routing} from "./app.routing";
+import {routing} from './app.routing';
 
 import {AppService} from './app.service';
-import {AuthGuard} from "./guards/auth.guard";
+import {AuthGuard} from './guards/auth.guard';
 import {LoginGuard} from './guards/login.guard';
-import {AuthenticationService} from "./services/authentication.service";
-import {JwtInterceptor} from "./services/jwt.interceptor";
+import {AuthenticationService} from './services/authentication.service';
+import {JwtInterceptor} from './services/jwt.interceptor';
 import {AuthComponent} from './auth/auth.component';
 import {TaskComponent} from './task/task.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';

@@ -1,5 +1,5 @@
-import * as Mongoose from "mongoose";
-import * as Bcrypt from "bcryptjs";
+import * as Mongoose from 'mongoose';
+import * as Bcrypt from 'bcryptjs';
 
 export interface IUser extends Mongoose.Document {
   _id: object;
@@ -34,19 +34,19 @@ UserSchema.methods.validatePassword = function(requestPassword) {
   return Bcrypt.compareSync(requestPassword, this.password);
 };
 
-UserSchema.pre("save", function(next) {
+UserSchema.pre('save', function(next) {
   const user = this;
 
-  if (!user.isModified("password")) {
+  if (!user.isModified('password')) {
     return next();
   }
 
-  user["password"] = hashPassword(user["password"]);
+  user['password'] = hashPassword(user['password']);
 
   return next();
 });
 
-UserSchema.pre("findOneAndUpdate", function() {
+UserSchema.pre('findOneAndUpdate', function() {
   const password = hashPassword(this.getUpdate().$set.password);
 
   if (!password) {
@@ -56,4 +56,4 @@ UserSchema.pre("findOneAndUpdate", function() {
   this.findOneAndUpdate({}, { password: password });
 });
 
-export const UserModel = Mongoose.model<IUser>("User", UserSchema);
+export const UserModel = Mongoose.model<IUser>('User', UserSchema);
