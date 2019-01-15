@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TaskService} from '../services/task.service';
 import {MatDialog} from '@angular/material';
 import {Task, TaskDialog} from '../models/models';
